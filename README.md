@@ -27,11 +27,11 @@
 
 Fine-tuned MLLMs ground queries in time well on their training domain but break down under domain shift. We trace this mainly to *visual* domain shift, which keeps the model from tying the localization skill it learned to the entity attention it already has. **EVIDENT** is a parameter-efficient framework that routes adaptation through explicit visual entities:
 
-| | Component | What it does | Code |
-|:-:|---|---|---|
-| 🧩 | **Entity Bottleneck (EB) Adapter** | Compresses the visual tokens of each frame into a few entity slots with slot attention and reconstructs the tokens from them | [`eb_adapter.py`](evident/model/eb_adapter.py) |
-| 🎯 | **Entity-Binding Distillation (EBD)** | Binds each slot to a coherent entity using DINOv2 objectness priors (k-means + Hungarian matching) | [`ebd_loss.py`](evident/losses/ebd_loss.py) |
-| 🔦 | **Entity-to-eVidence (E2V) Gating** | Weights each frame by how strongly it contains the subject and object of the query | [`eb_adapter.py`](evident/model/eb_adapter.py) |
+| Component | What it does | Code |
+|:-:|---|---|
+| **Entity Bottleneck (EB) Adapter** | Compresses the visual tokens of each frame into a few entity slots with slot attention and reconstructs the tokens from them | [`eb_adapter.py`](evident/model/eb_adapter.py) |
+| **Entity-Binding Distillation (EBD)** | Binds each slot to a coherent entity using DINOv2 objectness priors (k-means + Hungarian matching) | [`ebd_loss.py`](evident/losses/ebd_loss.py) |
+| **Entity-to-eVidence (E2V) Gating** | Weights each frame by how strongly it contains the subject and object of the query | [`eb_adapter.py`](evident/model/eb_adapter.py) |
 
 EVIDENT improves out-of-domain grounding across Charades-STA, QVHighlights and DiDeMo while staying competitive in-domain, training only ~2.4% of the parameters of Qwen2.5-VL-7B.
 
@@ -168,7 +168,7 @@ This project is released under the [Apache 2.0 License](LICENSE).
 @inproceedings{ahn2026evident,
   title     = {EVIDENT: Routing MLLM Adaptation through Entity-Grounded Visual Evidence for Cross-Domain Video Temporal Grounding},
   author    = {Ahn, Geo and Han, Jiwook and Kim, Youngrae and Lee, Joonseok and Choi, Jinwoo},
-  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  booktitle = {NeurIPS},
   year      = {2026}
 }
 ```
