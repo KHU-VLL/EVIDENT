@@ -28,7 +28,7 @@
 Fine-tuned MLLMs ground queries in time well on their training domain but break down under domain shift. We trace this mainly to *visual* domain shift, which keeps the model from tying the localization skill it learned to the entity attention it already has. **EVIDENT** is a parameter-efficient framework that routes adaptation through explicit visual entities:
 
 | Component | What it does | Code |
-|:-:|---|---|
+|:--|---|---|
 | **Entity Bottleneck (EB) Adapter** | Compresses the visual tokens of each frame into a few entity slots with slot attention and reconstructs the tokens from them | [`eb_adapter.py`](evident/model/eb_adapter.py) |
 | **Entity-Binding Distillation (EBD)** | Binds each slot to a coherent entity using DINOv2 objectness priors (k-means + Hungarian matching) | [`ebd_loss.py`](evident/losses/ebd_loss.py) |
 | **Entity-to-eVidence (E2V) Gating** | Weights each frame by how strongly it contains the subject and object of the query | [`eb_adapter.py`](evident/model/eb_adapter.py) |
