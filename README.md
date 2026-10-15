@@ -3,6 +3,7 @@
 # EVIDENT: Routing MLLM Adaptation through Entity-Grounded Visual Evidence for Cross-Domain Video Temporal Grounding
 
 [![arXiv](https://img.shields.io/badge/arXiv-2605.26104-b31b1b.svg?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2605.26104)
+[![Project Page](https://img.shields.io/badge/🌐-Project_Page-blue?style=plastic)](https://mreraser.github.io/EVIDENT_project_page/)
 [![NeurIPS 2026](https://img.shields.io/badge/NeurIPS-2026-4b44ce.svg)](https://arxiv.org/abs/2605.26104)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/KHU-VLL/EVIDENT?style=social)](https://github.com/KHU-VLL/EVIDENT)
@@ -37,9 +38,9 @@ EVIDENT improves out-of-domain grounding across Charades-STA, QVHighlights and D
 
 ## 🤗 Model Zoo
 
-Checkpoints are hosted at [mreraser/EVIDENT](https://huggingface.co/mreraser/EVIDENT) and are downloaded automatically by `load_evident` / `evaluate.py`.
+Checkpoints are hosted at [mreraser/EVIDENT](https://huggingface.co/mreraser/EVIDENT) and are downloaded automatically by `evaluate.py`.
 
-| Source | Checkpoint | → Charades-STA | → QVHighlights | → DiDeMo |
+| Source | Checkpoint | Target=Cha. | Target=QVH | Target=DiDeMo |
 |---|---|:-:|:-:|:-:|
 | Charades-STA | [`charades`](https://huggingface.co/mreraser/EVIDENT/tree/main/charades) | 69.1 / 59.9 | 59.8 / 55.2 | 55.4 / 48.5 |
 | QVHighlights | [`qvhighlights`](https://huggingface.co/mreraser/EVIDENT/tree/main/qvhighlights) | 50.2 / 49.0 | 82.2 / 75.3 | 36.0 / 40.6 |
@@ -53,6 +54,18 @@ conda create -n evident python=3.11 -y
 conda activate evident
 git clone https://github.com/KHU-VLL/EVIDENT.git && cd EVIDENT
 pip install -r requirements.txt
+```
+
+## 🗂️ Repository Structure
+
+```
+evident/
+├── model/      EB Adapter, slot attention, E2V gating, injection into Qwen2.5-VL, checkpoint loading
+├── losses/     Entity-Binding Distillation loss
+├── data/       video loading, prompt construction, dataset and collator
+└── train/      arguments and trainer
+tools/          DINOv2 feature and concept extraction
+scripts/        training and evaluation launchers
 ```
 
 ## 📦 Data Preparation
@@ -138,18 +151,6 @@ model = load_evident("checkpoints/evident_charades")               # your own ch
 ```
 
 See `predict()` in [`evaluate.py`](evaluate.py) for prompt construction and decoding.
-
-## 🗂️ Repository Structure
-
-```
-evident/
-├── model/      EB Adapter, slot attention, E2V gating, injection into Qwen2.5-VL, checkpoint loading
-├── losses/     Entity-Binding Distillation loss
-├── data/       video loading, prompt construction, dataset and collator
-└── train/      arguments and trainer (L = L_CE + λ·L_EBD)
-tools/          DINOv2 feature and concept extraction
-scripts/        training and evaluation launchers
-```
 
 ## 📄 License
 
